@@ -1,30 +1,86 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 29
+
+    def globalConfig = rootProject.extensions.getByName("ext")
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    compileSdkVersion globalConfig["androidCompileVersion"]
+
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.srg.citibox"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion globalConfig["androidTargetVersion"]
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+
     }
+
     buildTypes {
         release {
+            debuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
         }
     }
 }
 
+androidExtensions {
+    experimental = true
+}
+
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    def appDependencies = rootProject.ext.appDependencies
+    def testDependencies = rootProject.ext.testDependencies
+
+    implementation appDependencies.kotlinStdLib
+
+    // Views dependencies
+    implementation appDependencies.appCompat
+    implementation appDependencies.recyclerview
+    implementation appDependencies.constraintLayout
+    implementation appDependencies.kotlinCoroutinesAndroid
+
+
+    // Utils
+    implementation appDependencies.gson
+    debugImplementation appDependencies.leakCanary
+    releaseImplementation appDependencies.leakCanaryNoOp
+
+    // Test dependencies
+    testImplementation testDependencies.junit
+    testImplementation testDependencies.mockito
+    testImplementation testDependencies.mockitoKotlin
+    androidTestImplementation testDependencies.junit
+    androidTestImplementation testDependencies.testRunner
+    androidTestImplementation(testDependencies.espresso, {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestImplementation testDependencies.mockito
+    androidTestImplementation testDependencies.mockwebserver
+    androidTestImplementation testDependencies.dexmaker
+    androidTestImplementation testDependencies.dexmakerMockito
+}
+
+
+/*implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.1.0'
@@ -32,4 +88,4 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-}
+}*/

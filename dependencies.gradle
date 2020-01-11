@@ -1,0 +1,76 @@
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+        maven { url 'https://maven.google.com' }
+        maven { url "https://dl.bintray.com/drummer-aidan/maven/" }
+        mavenCentral()
+        google()
+        jcenter()
+    }
+}
+
+extss {
+    compiler = [kotlin: "1.3.61"]
+
+    build = [gradle     : "3.5.3",
+             buildToolds: "29.0.2"]
+
+    buildPlugins = [gradle: "com.android.tools.build:gradle:$build.gradle",
+                    kotlin: "org.jetbrains.kotlin:kotlin-gradle-plugin:$compiler.kotlin"]
+
+    androidCompileVersion = 28
+    androidTargetVersion = 28
+
+    //Libraries versions
+    appCompatVersion = '1.0.2'
+    recyclerViewVersion = '1.0.0'
+    constraintLayoutVersion = '1.1.3'
+    kotlinCoroutinesVersion = '1.1.1'
+    okhttpVersion = '3.10.0'
+    retrofitVersion = '2.4.0'
+    gsonVersion = '2.8.5'
+    leakCanaryVersion = '1.6.3'
+    timberVersion = '4.7.1'
+
+
+    //Testing versions
+    jUnitVersion = '4.12'
+    testingSupportVersion = "1.1.0"
+    espressoVersion = "3.1.0"
+    mockitoVersion = '2.22.0'
+    mockwebserverVersion = '3.9.0'
+    retrofitMockVersion = '2.3.0'
+    mockitoKotlinVersion = '1.1:1.5.0'
+    kotlinReflectVersion = '1.3.31'
+    dexmakerVersion = '1.2'
+    mockkVersion = '1.9.3'
+
+    appDependencies = [kotlinStdLib           : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$compiler.kotlin",
+                       kotlinCoroutinesCore   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion",
+                       kotlinCoroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion",
+                       appCompat              : "androidx.appcompat:appcompat:${appCompatVersion}",
+                       recyclerview           : "androidx.recyclerview:recyclerview:$recyclerViewVersion",
+                       constraintLayout       : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+                       okhttp                 : "com.squareup.okhttp3:okhttp:$okhttpVersion",
+                       retrofit               : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+                       retrofitGsonConverter  : "com.squareup.retrofit2:converter-gson:$retrofitVersion",
+                       gson                   : "com.google.code.gson:gson:$gsonVersion",
+                       timber                 : "com.jakewharton.timber:timber:$timberVersion",
+                       leakCanary             : "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion",
+                       leakCanaryNoOp         : "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion",
+    ]
+
+    testDependencies = [junit               : "junit:junit:$jUnitVersion",
+                        testRunner          : "androidx.test:runner:$testingSupportVersion",
+                        espresso            : "androidx.test.espresso:espresso-core:$espressoVersion",
+                        mockito             : "org.mockito:mockito-core:$mockitoVersion",
+                        mockitoKotlin       : "com.nhaarman:mockito-kotlin-kt$mockitoKotlinVersion",
+                        mockwebserver       : "com.squareup.okhttp3:mockwebserver:$mockwebserverVersion",
+                        retrofitMock        : "com.squareup.retrofit2:retrofit-mock:$retrofitMockVersion",
+                        dexmaker            : "com.google.dexmaker:dexmaker:$dexmakerVersion",
+                        dexmakerMockito     : "com.google.dexmaker:dexmaker-mockito:$dexmakerVersion",
+                        kotlinReflect       : "org.jetbrains.kotlin:kotlin-reflect:$kotlinReflectVersion",
+                        jodatimeTest        : "joda-time:joda-time:$jodatimeVersion",
+                        mockk               : "io.mockk:mockk:$mockkVersion",
+                        kotlinCoroutinesTest: "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinCoroutinesVersion"]
+}
