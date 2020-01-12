@@ -57,10 +57,14 @@ dependencies {
     implementation appDependencies.recyclerview
     implementation appDependencies.constraintLayout
     implementation appDependencies.kotlinCoroutinesAndroid
+    implementation appDependencies.okhttp
+    implementation appDependencies.retrofit
+    implementation appDependencies.retrofitGsonConverter
 
 
     // Utils
     implementation appDependencies.gson
+    implementation appDependencies.timber
     debugImplementation appDependencies.leakCanary
     releaseImplementation appDependencies.leakCanaryNoOp
 
