@@ -1,10 +1,10 @@
-package com.srg.citibox.common.dependency_injection.dagger_activity
+package com.srg.citibox.common.di.dagger_activity
 
 import androidx.appcompat.app.AppCompatActivity
-import com.srg.citibox.post_detail.presentation.PostDetailActivity
-import com.srg.citibox.post_list.presentation.PostListActivity
-import com.srg.citibox.common.dependency_injection.dagger_application.ApplicationComponent
-import com.srg.citibox.common.dependency_injection.dagger_application.CitiboxApplication
+import com.srg.citibox.post_detail.ui.PostDetailActivity
+import com.srg.citibox.post_list.ui.PostListActivity
+import com.srg.citibox.common.di.dagger_application.ApplicationComponent
+import com.srg.citibox.common.di.dagger_application.CitiboxApplication
 import java.lang.RuntimeException
 
 /**

@@ -46,6 +46,10 @@ androidExtensions {
     experimental = true
 }
 
+kapt {
+    generateStubs = true
+}
+
 dependencies {
     def appDependencies = rootProject.ext.appDependencies
     def testDependencies = rootProject.ext.testDependencies
@@ -60,6 +64,13 @@ dependencies {
     implementation appDependencies.okhttp
     implementation appDependencies.retrofit
     implementation appDependencies.retrofitGsonConverter
+    implementation appDependencies.dagger
+    annotationProcessor appDependencies.daggerProcessor
+    annotationProcessor appDependencies.daggerCompiler
+    kapt appDependencies.daggerProcessor
+    kapt appDependencies.daggerCompiler
+
+    api appDependencies.dagger
 
 
     // Utils

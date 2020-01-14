@@ -1,7 +1,7 @@
-package com.srg.citibox.common.dependency_injection.dagger_activity
+package com.srg.citibox.common.di.dagger_activity
 
-import com.srg.citibox.post_detail.presentation.PostDetailActivity
-import com.srg.citibox.post_list.presentation.PostListActivity
+import com.srg.citibox.post_detail.ui.PostDetailActivity
+import com.srg.citibox.post_list.ui.PostListActivity
 import dagger.Subcomponent
 
 /**

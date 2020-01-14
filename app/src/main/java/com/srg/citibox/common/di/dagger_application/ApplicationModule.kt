@@ -1,4 +1,4 @@
-package com.srg.citibox.common.dependency_injection.dagger_application
+package com.srg.citibox.common.di.dagger_application
 
 import android.app.Application
 import com.srg.citibox.common.data.network.retrofit.CitiboxApi

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CodeTestCitibox</string>
+    <string name="number_of_comments">Number of comments: </string>
+    <string name="author_name">Author name: </string>
+    <string name="post_title">Title: </string>
+    <string name="post_body">Body: </string>
 </resources>

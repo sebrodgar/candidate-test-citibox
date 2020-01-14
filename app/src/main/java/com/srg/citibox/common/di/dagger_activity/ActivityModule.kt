@@ -1,7 +1,6 @@
-package com.srg.citibox.common.dependency_injection.dagger_activity
+package com.srg.citibox.common.di.dagger_activity
 
 import dagger.Module
-import dagger.Provides
 
 /**
  * Created by Sebastián Rodríguez on 13,January,2020

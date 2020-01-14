@@ -1,4 +1,4 @@
-package com.srg.citibox.post_list.presentation
+package com.srg.citibox.post_list.ui
 
 import android.os.Bundle
 import com.srg.citibox.common.di.dagger_activity.ActivityComponent

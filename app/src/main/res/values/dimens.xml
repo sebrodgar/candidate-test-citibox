@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <dimen name="layout_margin">5dp</dimen>
+    <dimen name="item_margin_top_bottom">2dp</dimen>
+    <dimen name="item_margin_start_end">5dp</dimen>
+    <dimen name="size_view_title">50dp</dimen>
+
+    <dimen name="margin_text_author_comments">2dp</dimen>
+</resources>
