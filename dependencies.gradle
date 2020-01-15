@@ -31,7 +31,8 @@ ext {
     gsonVersion = '2.8.5'
     leakCanaryVersion = '1.6.3'
     timberVersion = '4.7.1'
-    daggerVersion = "2.24"
+    daggerVersion = '2.24'
+    lifecycleVersion = '2.1.0'
 
 
     //Testing versions
@@ -61,7 +62,9 @@ ext {
                        leakCanaryNoOp         : "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion",
                        daggerCompiler         : "com.google.dagger:dagger-compiler:$daggerVersion",
                        dagger                 : "com.google.dagger:dagger:$daggerVersion",
-                       daggerProcessor        : "com.google.dagger:dagger-android-processor:$daggerVersion"
+                       daggerProcessor        : "com.google.dagger:dagger-android-processor:$daggerVersion",
+                       lifecycle              : "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion",
+                       lifecycleViewModel     : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
 
     ]
 

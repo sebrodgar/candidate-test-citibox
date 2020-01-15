@@ -64,6 +64,8 @@ dependencies {
     implementation appDependencies.okhttp
     implementation appDependencies.retrofit
     implementation appDependencies.retrofitGsonConverter
+    implementation appDependencies.lifecycle
+    implementation appDependencies.lifecycleViewModel
     implementation appDependencies.dagger
     annotationProcessor appDependencies.daggerProcessor
     annotationProcessor appDependencies.daggerCompiler

@@ -14,7 +14,7 @@ class CitiboxError : Exception{
     enum class CitiboxErrorType(val errorCode: Int, val httpError: Int) {
 
         /**
-         * Internal error: Something went wrong, contact TMDb.
+         * Internal error: Something went wrong.
          */
         INTERNAL_SERVER_ERROR(11, 500),
 
@@ -22,6 +22,14 @@ class CitiboxError : Exception{
          * Failed.
          */
         UNKNOWN_ERROR(5, 1000);
+
+        companion object{
+            fun get(httpError: Int): CitiboxErrorType{
+                return values().find { it.httpError == httpError } ?: UNKNOWN_ERROR
+
+            }
+        }
+
 
     }
 

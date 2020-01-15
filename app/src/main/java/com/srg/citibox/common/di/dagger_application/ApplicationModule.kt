@@ -1,7 +1,10 @@
 package com.srg.citibox.common.di.dagger_application
 
-import android.app.Application
-import com.srg.citibox.common.data.network.retrofit.CitiboxApi
+import com.srg.citibox.common.data.network.retrofit.ClientApi
+import com.srg.citibox.post_list.data.datasource.CloudPostListDataSource
+import com.srg.citibox.post_list.data.datasource.LocalPostListDataSource
+import com.srg.citibox.post_list.data.repository.PostListDataRepository
+import com.srg.citibox.post_list.domain.repository.PostListRepository
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -35,11 +38,29 @@ class ApplicationModule {
 
     @Singleton
     @Provides
-    fun provideCitiboxApi(retrofit: Retrofit): CitiboxApi = retrofit.create(CitiboxApi::class.java)
+    fun provideNetworkApi(retrofit: Retrofit): ClientApi = retrofit.create(ClientApi::class.java)
 
-    /*@Singleton
+
+    @Singleton
     @Provides
-    fun providePostRepository()*/
+    fun provideCloudPostListDataSource(api: ClientApi): CloudPostListDataSource =
+        CloudPostListDataSource(api)
+
+    @Singleton
+    @Provides
+    fun provideLocalPostListDataSource(): LocalPostListDataSource = LocalPostListDataSource()
+
+
+    @Singleton
+    @Provides
+    fun providePostListDataRepository(
+        api: ClientApi
+    ): PostListRepository =
+        PostListDataRepository(
+            provideCloudPostListDataSource(
+                api
+            ), provideLocalPostListDataSource()
+        )
 
 
 }

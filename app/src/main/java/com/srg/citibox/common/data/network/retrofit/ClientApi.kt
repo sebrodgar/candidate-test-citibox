@@ -12,7 +12,7 @@ import retrofit2.http.Path
  * Created by Sebastián Rodríguez on 12,January,2020
  */
 
-interface CitiboxApi {
+interface ClientApi {
 
     @Headers("Content-Type: application/json")
     @GET("posts")
@@ -20,7 +20,7 @@ interface CitiboxApi {
 
     @Headers("Content-Type: application/json")
     @GET("users")
-    fun getUserByPostId(
+    suspend fun getUserByPostId(
         @Path("postId") postId: Long
     ): Response<List<User>>
 
