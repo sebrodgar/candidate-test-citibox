@@ -27,13 +27,17 @@ interface ClientApi {
 
     @Headers("Content-Type: application/json")
     @GET("comments")
-    fun getAllComments(): Response<List<Comment>>
+    suspend fun getAllComments(): Response<List<Comment>>
 
     @Headers("Content-Type: application/json")
     @GET("comments")
     fun getCommentsByPost(
         @Path("postId") postId: Long
     ): Response<List<Comment>>
+
+    @Headers("Content-Type: application/json")
+    @GET("users")
+    suspend fun getAllUsers(): Response<List<User>>
 
 
 }

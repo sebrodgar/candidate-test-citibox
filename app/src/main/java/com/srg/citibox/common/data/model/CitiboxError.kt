@@ -9,7 +9,7 @@ package com.srg.citibox.common.data.model
  * An enum containing the different errors that can occur.
  */
 
-class CitiboxError : Exception{
+class CitiboxError : Exception {
 
     enum class CitiboxErrorType(val errorCode: Int, val httpError: Int) {
 
@@ -23,8 +23,8 @@ class CitiboxError : Exception{
          */
         UNKNOWN_ERROR(5, 1000);
 
-        companion object{
-            fun get(httpError: Int): CitiboxErrorType{
+        companion object {
+            fun get(httpError: Int): CitiboxErrorType {
                 return values().find { it.httpError == httpError } ?: UNKNOWN_ERROR
 
             }
@@ -42,4 +42,13 @@ class CitiboxError : Exception{
     internal constructor(errorType: CitiboxErrorType, exception: Throwable) : super(exception) {
         this.errorType = errorType
     }
+
+    internal companion object {
+
+        fun unknownError(): CitiboxError {
+            return CitiboxError(CitiboxErrorType.UNKNOWN_ERROR)
+        }
+
+    }
+
 }

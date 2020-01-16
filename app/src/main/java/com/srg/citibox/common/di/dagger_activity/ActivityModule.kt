@@ -1,5 +1,8 @@
 package com.srg.citibox.common.di.dagger_activity
 
+import com.srg.citibox.post_detail.data.repository.PostDetailDataRepository
+import com.srg.citibox.post_detail.domain.usecase.GetAuthorByPost
+import com.srg.citibox.post_detail.domain.usecase.GetNumberOfCommentByPost
 import com.srg.citibox.post_list.data.repository.PostListDataRepository
 import com.srg.citibox.post_list.domain.usecase.GetAllPostList
 import dagger.Module
@@ -16,16 +19,12 @@ class ActivityModule {
     fun providesGetAllPostList(repository: PostListDataRepository): GetAllPostList =
         GetAllPostList(repository)
 
+    @Provides
+    fun providesGetAuthorByPost(repository: PostDetailDataRepository): GetAuthorByPost =
+        GetAuthorByPost(repository)
 
-    
-    /*@Provides
-    fun providesGet*/
+    @Provides
+    fun providesGetNumberOfCommentByPost(repository: PostDetailDataRepository): GetNumberOfCommentByPost =
+        GetNumberOfCommentByPost(repository)
 
-    /*
-
-    Aqui debo poner lasdependencias que tendrán las activities:
-    - Como pueden ser el viewModelFactory
-    - Los casos de uso
-
-     */
 }

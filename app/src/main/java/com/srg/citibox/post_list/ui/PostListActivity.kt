@@ -10,6 +10,9 @@ import com.srg.citibox.common.di.viewmodel.ViewModelFactory
 import androidx.lifecycle.ViewModelProviders
 import com.srg.citibox.R
 import com.srg.citibox.common.data.model.Post
+import com.srg.citibox.common.util.Constants
+import com.srg.citibox.common.util.extension.openActivity
+import com.srg.citibox.post_detail.ui.PostDetailActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 
@@ -58,6 +61,11 @@ class PostListActivity: BaseDaggerActivity(), OnSelectItemListener {
     }
 
     override fun onItemSelected(post: Post) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val extras = Bundle()
+        extras.putLong(Constants.POST_ID.value, post.id)
+        extras.putLong(Constants.USER_ID.value, post.userId)
+        extras.putSerializable(Constants.POST.value, post)
+
+        openActivity(PostDetailActivity::class.java, extras)
     }
 }

@@ -1,6 +1,9 @@
 package com.srg.citibox.common.di.dagger_application
 
 import com.srg.citibox.common.data.network.retrofit.ClientApi
+import com.srg.citibox.post_detail.data.datasource.CloudPostDetailDataSource
+import com.srg.citibox.post_detail.data.repository.PostDetailDataRepository
+import com.srg.citibox.post_detail.domain.repository.PostDetailRepository
 import com.srg.citibox.post_list.data.datasource.CloudPostListDataSource
 import com.srg.citibox.post_list.data.datasource.LocalPostListDataSource
 import com.srg.citibox.post_list.data.repository.PostListDataRepository
@@ -62,5 +65,22 @@ class ApplicationModule {
             ), provideLocalPostListDataSource()
         )
 
+
+    @Singleton
+    @Provides
+    fun provideCloudPostDetailDataSource(api: ClientApi): CloudPostDetailDataSource =
+        CloudPostDetailDataSource(api)
+
+
+    @Singleton
+    @Provides
+    fun providePostDetailDataRepository(
+        api: ClientApi
+    ): PostDetailRepository =
+        PostDetailDataRepository(
+            provideCloudPostDetailDataSource(
+                api
+            )
+        )
 
 }

@@ -40,6 +40,10 @@ android {
             debuggable true
         }
     }
+
+    dataBinding {
+        enabled true
+    }
 }
 
 androidExtensions {
