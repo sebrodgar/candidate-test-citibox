@@ -1,20 +1,19 @@
 package com.srg.citibox.post_list.ui
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.lifecycle.Observer
+import androidx.databinding.BindingAdapter
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.srg.citibox.common.di.dagger_activity.ActivityComponent
 import com.srg.citibox.common.di.dagger_activity.BaseDaggerActivity
-import com.srg.citibox.common.di.viewmodel.ViewModelFactory
-import androidx.lifecycle.ViewModelProviders
 import com.srg.citibox.R
 import com.srg.citibox.common.data.model.Post
 import com.srg.citibox.common.util.Constants
 import com.srg.citibox.common.util.extension.openActivity
+import com.srg.citibox.databinding.ActivityMainBinding
 import com.srg.citibox.post_detail.ui.PostDetailActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import timber.log.Timber
 
 import javax.inject.Inject
 
@@ -23,7 +22,7 @@ import javax.inject.Inject
  */
 
 
-class PostListActivity: BaseDaggerActivity(), OnSelectItemListener {
+class PostListActivity : BaseDaggerActivity(), OnSelectItemListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -33,39 +32,41 @@ class PostListActivity: BaseDaggerActivity(), OnSelectItemListener {
 
     private val postAdapter by lazy { PostListAdapter(emptyList()) { post -> onItemSelected(post) } }
 
-
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         getInjector<ActivityComponent>(this).inject(this)
 
-        postList.apply { adapter = postAdapter }
+        if (savedInstanceState == null) {
+            binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+            binding.postListViewModel = postListViewModel
+            binding.lifecycleOwner = this
+            postList.apply { adapter = postAdapter }
 
-        postListViewModel.posts.observe(this, Observer {
-            Timber.d("SE ACTUALIZA LOS POSTS")
-            setPosts(postListViewModel.posts.value)
-
-        })
-
-        if (savedInstanceState == null){
             postListViewModel.getPosts()
         }
 
-
-    }
-
-    private fun setPosts(posts: List<Post>?){
-        postAdapter.setPosts(posts)
     }
 
     override fun onItemSelected(post: Post) {
         val extras = Bundle()
-        extras.putLong(Constants.POST_ID.value, post.id)
-        extras.putLong(Constants.USER_ID.value, post.userId)
         extras.putSerializable(Constants.POST.value, post)
 
         openActivity(PostDetailActivity::class.java, extras)
     }
+
+    companion object {
+        @BindingAdapter("data")
+        @JvmStatic
+        fun setRecyclerViewProperties(recyclerView: RecyclerView?, data: List<Post>?) {
+            val adapter = recyclerView?.adapter
+            if (adapter is PostListAdapter && data != null) {
+                adapter.setPosts(data)
+            }
+        }
+    }
+
+
 }

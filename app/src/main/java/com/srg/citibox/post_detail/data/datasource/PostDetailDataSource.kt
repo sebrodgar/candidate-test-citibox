@@ -10,7 +10,7 @@ import com.srg.citibox.common.data.model.User
 interface PostDetailDataSource {
 
     suspend fun getAuthorByPost(
-        postId: Long,
+        userId: Long,
         onResult: (data: User?, error: CitiboxError?) -> Unit
     )
 
