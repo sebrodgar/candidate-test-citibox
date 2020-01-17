@@ -40,10 +40,18 @@ android {
             debuggable true
         }
     }
+
+    dataBinding {
+        enabled true
+    }
 }
 
 androidExtensions {
     experimental = true
+}
+
+kapt {
+    generateStubs = true
 }
 
 dependencies {
@@ -57,10 +65,23 @@ dependencies {
     implementation appDependencies.recyclerview
     implementation appDependencies.constraintLayout
     implementation appDependencies.kotlinCoroutinesAndroid
+    implementation appDependencies.okhttp
+    implementation appDependencies.retrofit
+    implementation appDependencies.retrofitGsonConverter
+    implementation appDependencies.lifecycle
+    implementation appDependencies.lifecycleViewModel
+    implementation appDependencies.dagger
+    annotationProcessor appDependencies.daggerProcessor
+    annotationProcessor appDependencies.daggerCompiler
+    kapt appDependencies.daggerProcessor
+    kapt appDependencies.daggerCompiler
+
+    api appDependencies.dagger
 
 
     // Utils
     implementation appDependencies.gson
+    implementation appDependencies.timber
     debugImplementation appDependencies.leakCanary
     releaseImplementation appDependencies.leakCanaryNoOp
 
