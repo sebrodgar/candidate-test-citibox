@@ -94,8 +94,8 @@ dependencies {
     androidTestImplementation(testDependencies.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    androidTestImplementation testDependencies.mockito
-    androidTestImplementation testDependencies.mockwebserver
+    //androidTestImplementation testDependencies.mockito
+    /*androidTestImplementation testDependencies.mockwebserver
     androidTestImplementation testDependencies.dexmaker
-    androidTestImplementation testDependencies.dexmakerMockito
+    androidTestImplementation testDependencies.dexmakerMockito*/
 }
