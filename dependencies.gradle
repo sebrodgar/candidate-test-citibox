@@ -47,6 +47,7 @@ ext {
     dexmakerVersion = '1.2'
     mockkVersion = '3.2.0'
     mockitoInlineVersion = '3.2.0'
+    mockkVersion = '1.9.3'
 
     appDependencies = [kotlinStdLib           : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$compiler.kotlin",
                        kotlinCoroutinesCore   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion",
@@ -75,6 +76,7 @@ ext {
                         mockito             : "org.mockito:mockito-core:$mockitoVersion",
                         mockitoKotlin       : "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion",
                         mockitoInline       : "org.mockito:mockito-inline:2.13.0:$mockitoInlineVersion",
+                        mockk               : "io.mockk:mockk:$mockkVersion",
                         mockwebserver       : "com.squareup.okhttp3:mockwebserver:$mockwebserverVersion",
                         retrofitMock        : "com.squareup.retrofit2:retrofit-mock:$retrofitMockVersion",
                         dexmaker            : "com.google.dexmaker:dexmaker:$dexmakerVersion",

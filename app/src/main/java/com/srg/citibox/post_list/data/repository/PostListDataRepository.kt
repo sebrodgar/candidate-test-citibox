@@ -1,6 +1,7 @@
 package com.srg.citibox.post_list.data.repository
 
 import com.srg.citibox.common.data.model.CitiboxError
+import com.srg.citibox.common.data.model.CitiboxResult
 import com.srg.citibox.common.data.model.Post
 import com.srg.citibox.post_list.data.datasource.CloudPostListDataSource
 import com.srg.citibox.post_list.data.datasource.LocalPostListDataSource
@@ -24,7 +25,7 @@ class PostListDataRepository @Inject constructor(
     private val localPostListDataSource: LocalPostListDataSource
 ) : PostListRepository {
 
-    override suspend fun getAllPosts(onResult: (data: List<Post>?, error: CitiboxError?) -> Unit) {
+    override suspend fun getAllPosts(onResult: (CitiboxResult<CitiboxError, List<Post>>) -> Unit) {
         cloudPostListDataSource.getAllPosts(onResult)
     }
 }

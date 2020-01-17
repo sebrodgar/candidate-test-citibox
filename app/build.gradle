@@ -88,14 +88,26 @@ dependencies {
     // Test dependencies
     testImplementation testDependencies.junit
     testImplementation testDependencies.mockito
+    androidTestImplementation testDependencies.retrofitMock
     testImplementation testDependencies.mockitoKotlin
     androidTestImplementation testDependencies.junit
     androidTestImplementation testDependencies.testRunner
     androidTestImplementation(testDependencies.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    testImplementation testDependencies.mockk
     //androidTestImplementation testDependencies.mockito
-    /*androidTestImplementation testDependencies.mockwebserver
-    androidTestImplementation testDependencies.dexmaker
-    androidTestImplementation testDependencies.dexmakerMockito*/
+    androidTestImplementation testDependencies.mockwebserver
+    //androidTestImplementation testDependencies.dexmaker
+    //androidTestImplementation testDependencies.dexmakerMockito
+    
+    testImplementation testDependencies.retrofitMock
+    testImplementation testDependencies.mockito
+    testImplementation testDependencies.mockitoKotlin
+    testImplementation testDependencies.mockk
+    testImplementation testDependencies.kotlinCoroutinesTest
+
+    androidTestImplementation testDependencies.mockwebserver
+    androidTestImplementation testDependencies.retrofitMock
+    androidTestImplementation testDependencies.kotlinReflect
 }

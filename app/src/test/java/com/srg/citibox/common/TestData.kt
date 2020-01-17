@@ -1,5 +1,6 @@
 package com.srg.citibox.common
 
+import com.srg.citibox.common.data.model.CitiboxError
 import com.srg.citibox.common.data.model.Post
 
 /**
@@ -16,4 +17,6 @@ abstract class TestData {
     )
 
     val mockPostList: List<Post> = listOf(post1)
+
+    val networkError = CitiboxError.internalServerError()
 }

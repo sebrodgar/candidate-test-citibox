@@ -1,12 +1,13 @@
-package com.srg.citibox.data
+package com.srg.citibox.post_list.data
 
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
 import com.srg.citibox.common.TestData
 import com.srg.citibox.common.data.model.CitiboxError
 import com.srg.citibox.common.data.model.Post
+import com.srg.citibox.common.data.model.foldFailure
+import com.srg.citibox.common.data.model.foldSuccess
 import com.srg.citibox.post_list.data.datasource.CloudPostListDataSource
-import com.srg.citibox.post_list.data.datasource.PostsListDataSource
 import com.srg.citibox.post_list.data.repository.PostListDataRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -24,7 +25,6 @@ import org.junit.Assert.*
 class PostRepositoryTest : TestData() {
 
     lateinit var cloudPostListDataSource: CloudPostListDataSource
-    lateinit var postsListDataSource: PostsListDataSource
     lateinit var postListDataRepository: PostListDataRepository
 
     @Before
@@ -46,11 +46,29 @@ class PostRepositoryTest : TestData() {
             r.invoke(mockPostList, null)
         }
 
-        postListDataRepository.getAllPosts { data, error ->
-            assertNull(error)
-            assertNotNull(data)
-            assertEquals(mockPostList, data)
-            print("Successful response ${data.toString()}")
+        postListDataRepository.getAllPosts { result ->
+            assertNull(result.foldFailure())
+            assertNotNull(result.foldSuccess())
+            assertEquals(mockPostList, result.foldSuccess())
+            print("Successful response ${result.foldSuccess().toString()}")
+        }
+    }
+    @Test
+    fun `get post list error response`() = runBlocking{
+
+        assertNotNull(cloudPostListDataSource)
+        assertNotNull(postListDataRepository)
+
+        whenever(cloudPostListDataSource.getAllPosts(onResult = any())).thenAnswer {
+            val onResult = it.getArgument<(data:List<Post>?, error: CitiboxError?) -> Unit>(0)
+            onResult.invoke(null, networkError)
+        }
+
+        postListDataRepository.getAllPosts { result ->
+            assertNull(result.foldSuccess())
+            assertNotNull(result.foldFailure())
+            assertEquals(result.foldFailure(), networkError)
+            print("Error response ${result.foldFailure().toString()}")
         }
     }
 }

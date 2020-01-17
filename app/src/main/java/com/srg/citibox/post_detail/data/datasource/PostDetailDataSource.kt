@@ -1,6 +1,8 @@
 package com.srg.citibox.post_detail.data.datasource
 
 import com.srg.citibox.common.data.model.CitiboxError
+import com.srg.citibox.common.data.model.CitiboxResult
+import com.srg.citibox.common.data.model.Post
 import com.srg.citibox.common.data.model.User
 
 /**
@@ -11,11 +13,11 @@ interface PostDetailDataSource {
 
     suspend fun getAuthorByPost(
         userId: Long,
-        onResult: (data: User?, error: CitiboxError?) -> Unit
+        onResult: (CitiboxResult<CitiboxError, User>) -> Unit
     )
 
     suspend fun getNumberOfCommentsByPost(
         postId: Long,
-        onResult: (data: Int?, error: CitiboxError?) -> Unit
+        onResult: (CitiboxResult<CitiboxError, Int>) -> Unit
     )
 }
