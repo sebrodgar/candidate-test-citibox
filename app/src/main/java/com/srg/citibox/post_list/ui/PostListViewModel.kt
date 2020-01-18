@@ -20,10 +20,19 @@ class PostListViewModel @Inject constructor(private val getAllPostList: GetAllPo
 
     var posts: MutableLiveData<List<Post>> = MutableLiveData(emptyList())
     var errorLive: MutableLiveData<CitiboxError> = MutableLiveData()
+    var _showLoading: MutableLiveData<Boolean> = MutableLiveData(true)
+    var _showList: MutableLiveData<Boolean> = MutableLiveData(false)
 
     fun getPosts() {
         viewModelScope.launch {
             getAllPostList.getAllPostList { result ->
+                _showLoading.value?.let {
+                    if (it) {
+                        _showLoading.postValue(false)
+                        _showList.postValue(true)
+                    }
+                }
+
                 if (result.isSuccess)
                     posts.postValue(result.foldSuccess())
                 else

@@ -1,6 +1,7 @@
 package com.srg.citibox.post_list.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +16,7 @@ import com.srg.citibox.databinding.ActivityMainBinding
 import com.srg.citibox.post_detail.ui.PostDetailActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
+
 
 /**
  * Created by Sebastián Rodríguez on 13,January,2020
@@ -49,6 +51,8 @@ class PostListActivity : BaseDaggerActivity(), OnSelectItemListener {
 
     }
 
+
+
     override fun onItemSelected(post: Post) {
         val extras = Bundle()
         extras.putSerializable(Constants.POST.value, post)
@@ -64,6 +68,12 @@ class PostListActivity : BaseDaggerActivity(), OnSelectItemListener {
             if (adapter is PostListAdapter && data != null) {
                 adapter.setPosts(data)
             }
+        }
+
+        @BindingAdapter("android:visibility")
+        @JvmStatic
+        fun setVisibility(view: View, value: Boolean) {
+            view.visibility = if (value) View.VISIBLE else View.GONE
         }
     }
 
