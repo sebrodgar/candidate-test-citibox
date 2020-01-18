@@ -5,16 +5,15 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.srg.citibox.common.di.dagger_activity.ActivityComponent
-import com.srg.citibox.common.di.dagger_activity.BaseDaggerActivity
 import com.srg.citibox.R
 import com.srg.citibox.common.data.model.Post
+import com.srg.citibox.common.di.dagger_activity.ActivityComponent
+import com.srg.citibox.common.di.dagger_activity.BaseDaggerActivity
 import com.srg.citibox.common.util.Constants
 import com.srg.citibox.common.util.extension.openActivity
 import com.srg.citibox.databinding.ActivityMainBinding
 import com.srg.citibox.post_detail.ui.PostDetailActivity
 import kotlinx.android.synthetic.main.activity_main.*
-
 import javax.inject.Inject
 
 /**

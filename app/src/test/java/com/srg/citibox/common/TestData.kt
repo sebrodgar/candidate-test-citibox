@@ -3,10 +3,8 @@ package com.srg.citibox.common
 import com.srg.citibox.common.data.model.*
 import com.srg.citibox.common.data.network.retrofit.ClientApi
 import okhttp3.ResponseBody
-import org.mockito.Mock
 import org.mockito.Mockito
 import retrofit2.Response
-
 
 
 /**
@@ -18,14 +16,14 @@ abstract class TestData {
 
     val clientApi: ClientApi = Mockito.mock(ClientApi::class.java)
 
-    private val post1: Post = Post(
+    val post1: Post = Post(
         id = 1,
         title = "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
         body = "quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto",
         userId = 1
     )
 
-    private val user1 = User(
+    val user1 = User(
         id = 1,
         name = "Leanne Graham",
         username = "Bret",
@@ -52,7 +50,4 @@ abstract class TestData {
     val responseErrorPost: Response<List<Post>> = Response.error(500, ResponseBody.create(null, "Internal Error"))
     val responseErrorComment: Response<List<Comment>> = Response.error(500, ResponseBody.create(null, "Internal Error"))
 
-    val onResultError = CitiboxResult.Failure(CitiboxError.internalServerError())
-
-    val onResultSucces = CitiboxResult.Success(mockPostList)
 }

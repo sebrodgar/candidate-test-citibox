@@ -37,7 +37,7 @@ ext {
 
     //Testing versions
     jUnitVersion = '4.12'
-    testingSupportVersion = "1.1.0"
+    testingSupportVersion = "1.1.1"
     espressoVersion = "3.1.0"
     mockitoVersion = '2.22.0'
     mockwebserverVersion = '3.9.0'
@@ -48,6 +48,7 @@ ext {
     mockkVersion = '3.2.0'
     mockitoInlineVersion = '3.2.0'
     mockkVersion = '1.9.3'
+    archVersion ='1.1.1'
 
     appDependencies = [kotlinStdLib           : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$compiler.kotlin",
                        kotlinCoroutinesCore   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion",
@@ -72,6 +73,7 @@ ext {
 
     testDependencies = [junit               : "junit:junit:$jUnitVersion",
                         testRunner          : "androidx.test:runner:$testingSupportVersion",
+                        arch                : "android.arch.core:core-testing:$archVersion",
                         espresso            : "androidx.test.espresso:espresso-core:$espressoVersion",
                         mockito             : "org.mockito:mockito-core:$mockitoVersion",
                         mockitoKotlin       : "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion",

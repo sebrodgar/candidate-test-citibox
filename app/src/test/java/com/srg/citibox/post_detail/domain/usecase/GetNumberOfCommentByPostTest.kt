@@ -2,9 +2,7 @@ package com.srg.citibox.post_detail.domain.usecase
 
 import com.srg.citibox.common.TestData
 import com.srg.citibox.common.data.model.Comment
-import com.srg.citibox.common.data.model.User
 import com.srg.citibox.common.data.model.foldSuccess
-import com.srg.citibox.common.data.network.retrofit.ClientApi
 import com.srg.citibox.post_detail.data.datasource.CloudPostDetailDataSource
 import com.srg.citibox.post_detail.data.repository.PostDetailDataRepository
 import com.srg.citibox.post_detail.domain.repository.PostDetailRepository
@@ -12,7 +10,6 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mock
 import org.mockito.Mockito
 import retrofit2.Response
 

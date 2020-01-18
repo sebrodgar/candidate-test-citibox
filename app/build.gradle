@@ -106,6 +106,7 @@ dependencies {
     testImplementation testDependencies.mockitoKotlin
     testImplementation testDependencies.mockk
     testImplementation testDependencies.kotlinCoroutinesTest
+    testImplementation testDependencies.arch
 
     androidTestImplementation testDependencies.mockwebserver
     androidTestImplementation testDependencies.retrofitMock
