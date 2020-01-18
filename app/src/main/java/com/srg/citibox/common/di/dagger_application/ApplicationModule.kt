@@ -5,7 +5,6 @@ import com.srg.citibox.post_detail.data.datasource.CloudPostDetailDataSource
 import com.srg.citibox.post_detail.data.repository.PostDetailDataRepository
 import com.srg.citibox.post_detail.domain.repository.PostDetailRepository
 import com.srg.citibox.post_list.data.datasource.CloudPostListDataSource
-import com.srg.citibox.post_list.data.datasource.LocalPostListDataSource
 import com.srg.citibox.post_list.data.repository.PostListDataRepository
 import com.srg.citibox.post_list.domain.repository.PostListRepository
 import dagger.Module
@@ -49,10 +48,6 @@ class ApplicationModule {
     fun provideCloudPostListDataSource(api: ClientApi): CloudPostListDataSource =
         CloudPostListDataSource(api)
 
-    @Singleton
-    @Provides
-    fun provideLocalPostListDataSource(): LocalPostListDataSource = LocalPostListDataSource()
-
 
     @Singleton
     @Provides
@@ -62,7 +57,7 @@ class ApplicationModule {
         PostListDataRepository(
             provideCloudPostListDataSource(
                 api
-            ), provideLocalPostListDataSource()
+            )
         )
 
 
