@@ -1,6 +1,7 @@
 package com.srg.citibox.post_list.domain.repository
 
 import com.srg.citibox.common.data.model.CitiboxError
+import com.srg.citibox.common.data.model.CitiboxResult
 import com.srg.citibox.common.data.model.Post
 
 /**
@@ -9,5 +10,5 @@ import com.srg.citibox.common.data.model.Post
 
 interface PostListRepository {
 
-    suspend fun getAllPosts(onResult: (data: List<Post>?, error: CitiboxError?) -> Unit)
+    suspend fun getAllPosts(onResult: (CitiboxResult<CitiboxError, List<Post>>) -> Unit)
 }

@@ -19,21 +19,8 @@ interface ClientApi {
     suspend fun getAllPosts(): Response<List<Post>>
 
     @Headers("Content-Type: application/json")
-    @GET("users")
-    suspend fun getUserByPostId(
-        @Path("postId") postId: Long
-    ): Response<List<User>>
-
-
-    @Headers("Content-Type: application/json")
     @GET("comments")
     suspend fun getAllComments(): Response<List<Comment>>
-
-    @Headers("Content-Type: application/json")
-    @GET("comments")
-    fun getCommentsByPost(
-        @Path("postId") postId: Long
-    ): Response<List<Comment>>
 
     @Headers("Content-Type: application/json")
     @GET("users")

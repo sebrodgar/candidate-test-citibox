@@ -1,6 +1,8 @@
 package com.srg.citibox.post_detail.data.datasource
 
 import com.srg.citibox.common.data.model.CitiboxError
+import com.srg.citibox.common.data.model.CitiboxResult
+import com.srg.citibox.common.data.model.Post
 import com.srg.citibox.common.data.model.User
 import com.srg.citibox.common.data.network.retrofit.ClientApi
 import kotlinx.coroutines.Dispatchers
@@ -16,47 +18,57 @@ class CloudPostDetailDataSource @Inject constructor(private val api: ClientApi) 
 
     override suspend fun getAuthorByPost(
         userId: Long,
-        onResult: (data: User?, error: CitiboxError?) -> Unit
+        onResult: (CitiboxResult<CitiboxError, User>) -> Unit
     ) {
 
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             val response = api.getAllUsers()
 
             if (response.isSuccessful) {
-                val user = response.body()?.let { users -> users.find { user -> user.id == userId } }
-                user?.let { onResult(it, null) } ?: onResult(null, CitiboxError.unknownError())
+                val user =
+                    response.body()?.let { users -> users.find { user -> user.id == userId } }
+                user?.let { onResult(CitiboxResult.Success(user)) }
+                    ?: onResult(CitiboxResult.Failure(CitiboxError.unknownError()))
 
             } else {
                 onResult(
-                    null,
-                    CitiboxError(
-                        CitiboxError.CitiboxErrorType.get(response.code()),
-                        response.message()
-                    ))
+                    CitiboxResult.Failure(
+                        CitiboxError(
+                            CitiboxError.CitiboxErrorType.get(response.code()),
+                            response.message()
+                        )
+                    )
+                )
+
             }
         }
     }
 
+
     override suspend fun getNumberOfCommentsByPost(
         postId: Long,
-        onResult: (data: Int?, error: CitiboxError?) -> Unit
+        onResult: (CitiboxResult<CitiboxError, Int>) -> Unit
     ) {
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             val response = api.getAllComments()
 
             if (response.isSuccessful) {
-                val numberOfComments = response.body()?.let { comments -> comments.filter { comment -> comment.postId == postId }}?.size
-                numberOfComments?.let { onResult(it, null) } ?: onResult(null, CitiboxError.unknownError())
+                val numberOfComments = response.body()
+                    ?.let { comments -> comments.filter { comment -> comment.postId == postId } }
+                    ?.size
+                numberOfComments?.let { onResult(CitiboxResult.Success(numberOfComments)) } ?: onResult(
+                    CitiboxResult.Failure(
+                    CitiboxError.unknownError())
+                )
 
             } else {
                 onResult(
-                    null,
-                    CitiboxError(
-                        CitiboxError.CitiboxErrorType.get(response.code()),
-                        response.message()
-                    ))
+                    CitiboxResult.Failure(
+                        CitiboxError.unknownError())
+                )
             }
-        }    }
+        }
+    }
 
 
 }

@@ -49,6 +49,10 @@ class CitiboxError : Exception {
             return CitiboxError(CitiboxErrorType.UNKNOWN_ERROR)
         }
 
+        fun internalServerError(): CitiboxError {
+            return CitiboxError(CitiboxErrorType.INTERNAL_SERVER_ERROR)
+        }
+
     }
 
 }

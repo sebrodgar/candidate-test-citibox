@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".post_detail.ui.PostDetailActivity"/>
+        <activity android:name=".post_detail.ui.PostDetailActivity"
+            android:label="@string/post_detail_screen"/>
 
     </application>
 

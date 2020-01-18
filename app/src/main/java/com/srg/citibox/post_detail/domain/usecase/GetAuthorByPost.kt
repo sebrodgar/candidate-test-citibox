@@ -1,6 +1,7 @@
 package com.srg.citibox.post_detail.domain.usecase
 
 import com.srg.citibox.common.data.model.CitiboxError
+import com.srg.citibox.common.data.model.CitiboxResult
 import com.srg.citibox.common.data.model.User
 import com.srg.citibox.post_detail.domain.repository.PostDetailRepository
 import javax.inject.Inject
@@ -13,7 +14,7 @@ class GetAuthorByPost @Inject constructor(private val postDetailRepository: Post
 
     suspend fun getAuthorByPost(
         userId: Long,
-        onResult: (data: User?, error: CitiboxError?) -> Unit
+        onResult: (CitiboxResult<CitiboxError, User>) -> Unit
     ) {
 
         postDetailRepository.getAuthorByPost(userId, onResult)

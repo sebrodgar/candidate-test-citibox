@@ -1,6 +1,7 @@
 package com.srg.citibox.post_list.data.datasource
 
 import com.srg.citibox.common.data.model.CitiboxError
+import com.srg.citibox.common.data.model.CitiboxResult
 import com.srg.citibox.common.data.model.Post
 import com.srg.citibox.common.data.network.retrofit.ClientApi
 import kotlinx.coroutines.Dispatchers
@@ -14,22 +15,23 @@ import javax.inject.Inject
 class CloudPostListDataSource @Inject constructor(private val api: ClientApi) : PostsListDataSource {
 
 
-    override suspend fun getAllPosts(onResult: (data: List<Post>?, error: CitiboxError?) -> Unit) {
+    override suspend fun getAllPosts(onResult: (CitiboxResult<CitiboxError, List<Post>>) -> Unit) {
 
         withContext(Dispatchers.IO) {
             val response = api.getAllPosts()
-
             if (response.isSuccessful) {
-                onResult(response.body(), null)
+                response.body()?.let {
+                    onResult(CitiboxResult.Success(it))
+                } ?: onResult(CitiboxResult.Failure(CitiboxError.unknownError()))
             } else {
-                onResult(
-                    null,
-                    CitiboxError(
-                        CitiboxError.CitiboxErrorType.get(response.code()),
-                        response.message()
-                    ))
+                onResult(CitiboxResult.Failure(CitiboxError(
+                    CitiboxError.CitiboxErrorType.get(response.code()),
+                    response.message()
+                )))
+
             }
         }
 
     }
+
 }
